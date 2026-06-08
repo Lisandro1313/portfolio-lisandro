@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lisandro Etcheverry — Full Stack Developer</title>
-<meta name="description" content="Lisandro Etcheverry — Desarrollador Full Stack (React, TypeScript, Node.js/NestJS, Java/Spring Boot, PostgreSQL). Proyectos web, móviles y sistemas de gestión. La Plata, Argentina." />
+<meta name="description" content="Lisandro Etcheverry — Full Stack Developer (React, TypeScript, Node.js/NestJS, Java/Spring Boot, PostgreSQL). Web, mobile and management systems. La Plata, Argentina." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -21,15 +21,20 @@
   section{padding:64px 0}
   h2.sec{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--brand);margin-bottom:8px;font-weight:700}
   h3.title{font-size:clamp(24px,4vw,32px);font-weight:800;margin-bottom:24px}
+  section p strong,.lead strong{color:var(--ink)}
 
   /* Nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(10,15,30,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;justify-content:space-between;align-items:center;height:60px}
   .brand{font-weight:900;font-size:18px}
   .brand span{color:var(--brand)}
+  .nav-right{display:flex;align-items:center;gap:16px}
   .nav-links{display:flex;gap:22px;font-size:14px;font-weight:600;color:var(--muted)}
   .nav-links a:hover{color:var(--ink)}
-  @media(max-width:640px){.nav-links{display:none}}
+  @media(max-width:680px){.nav-links{display:none}}
+  .lang{display:flex;gap:4px}
+  .lang-btn{font-size:12px;font-weight:800;color:var(--muted);padding:5px 9px;border-radius:7px;border:1px solid var(--line);cursor:pointer;background:transparent;transition:all .15s}
+  .lang-btn.active{background:var(--brand);color:#04121a;border-color:var(--brand)}
 
   /* Hero */
   .hero{padding:80px 0 48px;background:radial-gradient(1200px 400px at 70% -10%,rgba(56,189,248,.16),transparent),radial-gradient(900px 400px at 0% 10%,rgba(34,197,94,.12),transparent)}
@@ -46,14 +51,12 @@
   .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px;color:var(--muted);font-size:14px}
   .meta span{display:flex;align-items:center;gap:7px}
 
-  /* Skills */
   .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .skillcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
   .skillcard h4{font-size:14px;color:var(--brand);margin-bottom:10px;letter-spacing:.5px}
   .chips{display:flex;flex-wrap:wrap;gap:7px}
   .chip{background:#0e1830;border:1px solid var(--line);color:var(--ink);font-size:13px;font-weight:600;padding:5px 11px;border-radius:8px}
 
-  /* Projects */
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
   .proj{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;transition:transform .15s,border-color .15s,box-shadow .15s}
   .proj:hover{transform:translateY(-3px);border-color:var(--brand);box-shadow:0 14px 40px rgba(2,6,23,.5)}
@@ -63,11 +66,11 @@
   .proj p{color:var(--muted);font-size:14px;margin:8px 0 14px;flex:1}
   .proj .stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
   .proj .stack span{font-size:11px;color:var(--muted);background:#0e1830;border:1px solid var(--line);padding:3px 8px;border-radius:6px}
-  .proj .links{display:flex;gap:10px}
+  .proj .links{display:flex;gap:10px;flex-wrap:wrap}
   .proj .links a{font-size:13px;font-weight:700;color:var(--brand)}
   .proj .links a.demo{color:var(--brand2)}
+  .proj .links .priv{font-size:13px;color:var(--muted)}
 
-  /* Experience */
   .exp{border-left:2px solid var(--line);padding-left:22px;margin-left:6px}
   .exp .item{position:relative;padding-bottom:26px}
   .exp .item::before{content:"";position:absolute;left:-29px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--brand);border:3px solid var(--bg)}
@@ -75,7 +78,6 @@
   .exp .item .when{font-size:13px;color:var(--brand);font-weight:600;margin:2px 0 6px}
   .exp .item p{color:var(--muted);font-size:14px}
 
-  /* Contact */
   .contact{background:linear-gradient(120deg,rgba(56,189,248,.08),rgba(34,197,94,.06));border:1px solid var(--line);border-radius:20px;padding:40px;text-align:center}
   .contact h3{font-size:clamp(24px,4vw,34px);font-weight:900;margin-bottom:10px}
   .contact p{color:var(--muted);margin-bottom:22px}
@@ -87,165 +89,167 @@
 
 <nav><div class="wrap nav-in">
   <div class="brand">Lisandro<span>.dev</span></div>
-  <div class="nav-links">
-    <a href="#sobre">Sobre mí</a>
-    <a href="#skills">Skills</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#experiencia">Experiencia</a>
-    <a href="#contacto">Contacto</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#sobre" data-i18n="nav.about">Sobre mí</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+      <a href="#experiencia" data-i18n="nav.exp">Experiencia</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </div>
+    <div class="lang">
+      <button class="lang-btn" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="pill">🟢 Disponible para trabajar</span>
+  <span class="pill" data-i18n="hero.pill">🟢 Disponible para trabajar</span>
   <h1>Lisandro <span class="grad">Etcheverry</span></h1>
   <div class="role">Full Stack Developer · React · TypeScript · Node.js / NestJS · Java / Spring Boot</div>
-  <p class="lead">Construyo aplicaciones web, móviles y sistemas de gestión de punta a punta. Experiencia en proyectos freelance y en la Municipalidad de La Plata, con foco en productos útiles, prolijos y que llegan a producción.</p>
+  <p class="lead" data-i18n="hero.lead">Construyo aplicaciones web, móviles y sistemas de gestión de punta a punta. Experiencia en proyectos freelance y en la Municipalidad de La Plata, con foco en productos útiles, prolijos y que llegan a producción.</p>
   <div class="cta">
-    <a class="btn primary" href="#proyectos">Ver proyectos</a>
-    <a class="btn ghost" href="mailto:lism.etcheverry@gmail.com">Contactarme</a>
-    <a class="btn ghost" href="/cv.pdf" download>Descargar CV</a>
+    <a class="btn primary" href="#proyectos" data-i18n="hero.btnProjects">Ver proyectos</a>
+    <a class="btn ghost" href="mailto:lism.etcheverry@gmail.com" data-i18n="hero.btnContact">Contactarme</a>
+    <a class="btn ghost" href="/cv.pdf" download data-i18n="hero.btnCV">Descargar CV</a>
   </div>
   <div class="meta">
-    <span>📍 La Plata, Argentina</span>
-    <span>🌐 Inglés B2</span>
-    <span>🎓 Lic. en Sistemas (UNLP)</span>
+    <span data-i18n="hero.meta1">📍 La Plata, Argentina</span>
+    <span data-i18n="hero.meta2">🌐 Inglés B2</span>
+    <span data-i18n="hero.meta3">🎓 Lic. en Sistemas (UNLP)</span>
   </div>
 </div></header>
 
 <section id="sobre"><div class="wrap">
-  <h2 class="sec">Sobre mí</h2>
-  <h3 class="title">Desarrollador full-stack que termina y despliega</h3>
-  <p style="max-width:740px;color:var(--muted);font-size:17px">
-    Trabajo el ciclo completo: relevamiento, diseño, desarrollo, pruebas y puesta en producción.
-    Hice sistemas internos para la <strong style="color:var(--ink)">Municipalidad de La Plata</strong> (gestión de programas sociales,
-    dashboards, trazabilidad) y proyectos freelance de e-commerce, fintech, e-learning, apps móviles y juegos.
-    Me muevo cómodo tanto en el <strong style="color:var(--ink)">frontend</strong> (React, Next.js, TypeScript) como en el
-    <strong style="color:var(--ink)">backend</strong> (Node.js/NestJS, Java/Spring Boot, PostgreSQL) y en el deploy.
+  <h2 class="sec" data-i18n="about.sec">Sobre mí</h2>
+  <h3 class="title" data-i18n="about.title">Desarrollador full-stack que termina y despliega</h3>
+  <p style="max-width:740px;color:var(--muted);font-size:17px" data-i18n="about.body">
+    Trabajo el ciclo completo: relevamiento, diseño, desarrollo, pruebas y puesta en producción. Hice sistemas internos para la <strong>Municipalidad de La Plata</strong> (gestión de programas sociales, dashboards, trazabilidad) y proyectos freelance de e-commerce, fintech, e-learning, apps móviles y juegos. Me muevo cómodo tanto en el <strong>frontend</strong> (React, Next.js, TypeScript) como en el <strong>backend</strong> (Node.js/NestJS, Java/Spring Boot, PostgreSQL) y en el deploy.
   </p>
 </div></section>
 
 <section id="skills" style="background:var(--bg2)"><div class="wrap">
-  <h2 class="sec">Stack</h2>
-  <h3 class="title">Tecnologías que uso</h3>
+  <h2 class="sec" data-i18n="skills.sec">Stack</h2>
+  <h3 class="title" data-i18n="skills.title">Tecnologías que uso</h3>
   <div class="skills">
-    <div class="skillcard"><h4>Frontend</h4><div class="chips">
-      <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Angular</span><span class="chip">React Native</span><span class="chip">HTML/CSS</span><span class="chip">Material UI</span>
+    <div class="skillcard"><h4 data-i18n="skills.frontend">Frontend</h4><div class="chips">
+      <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Redux</span><span class="chip">Angular</span><span class="chip">React Native</span><span class="chip">HTML/CSS</span>
     </div></div>
-    <div class="skillcard"><h4>Backend</h4><div class="chips">
-      <span class="chip">Node.js</span><span class="chip">NestJS</span><span class="chip">Express</span><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">APIs REST</span>
+    <div class="skillcard"><h4 data-i18n="skills.backend">Backend</h4><div class="chips">
+      <span class="chip">Node.js</span><span class="chip">NestJS</span><span class="chip">Express</span><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">REST APIs</span>
     </div></div>
-    <div class="skillcard"><h4>Bases de datos</h4><div class="chips">
+    <div class="skillcard"><h4 data-i18n="skills.db">Bases de datos</h4><div class="chips">
       <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Supabase</span><span class="chip">Prisma</span>
     </div></div>
-    <div class="skillcard"><h4>Herramientas & Prácticas</h4><div class="chips">
+    <div class="skillcard"><h4 data-i18n="skills.tools">Herramientas & Prácticas</h4><div class="chips">
       <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip">Postman</span><span class="chip">Jira</span><span class="chip">Scrum / Agile</span>
     </div></div>
   </div>
 </div></section>
 
 <section id="proyectos"><div class="wrap">
-  <h2 class="sec">Portfolio</h2>
-  <h3 class="title">Proyectos seleccionados</h3>
+  <h2 class="sec" data-i18n="projects.sec">Portfolio</h2>
+  <h3 class="title" data-i18n="projects.title">Proyectos seleccionados</h3>
   <div class="grid">
 
     <div class="proj">
       <div class="emoji">🍽️</div>
-      <span class="tag">Sistema de gestión · Municipal</span>
-      <h4>SIGAM — Gestión Alimentaria Municipal</h4>
-      <p>Sistema integral de gestión pública: beneficiarios, stock, remitos, depósitos, casos críticos, reportes y paneles de control. Proyecto end-to-end en producción.</p>
+      <span class="tag" data-i18n="proj1.tag">Sistema de gestión · Municipal</span>
+      <h4 data-i18n="proj1.title">SIGAM — Gestión Alimentaria Municipal</h4>
+      <p data-i18n="proj1.desc">Sistema integral de gestión pública: beneficiarios, stock, remitos, depósitos, casos críticos, reportes y paneles de control. Proyecto end-to-end en producción.</p>
       <div class="stack"><span>React</span><span>TypeScript</span><span>NestJS</span><span>PostgreSQL</span><span>Prisma</span></div>
-      <div class="links"><span style="font-size:13px;color:var(--muted)">🔒 Proyecto privado (gobierno)</span></div>
+      <div class="links"><span class="priv" data-i18n="proj1.link">🔒 Proyecto privado (gobierno)</span></div>
     </div>
 
     <div class="proj">
       <div class="emoji">🎮</div>
-      <span class="tag">Juego HTML5</span>
+      <span class="tag" data-i18n="proj2.tag">Juego HTML5</span>
       <h4>Penales Mundial 2026</h4>
-      <p>Juego de penales con fase de grupos y eliminatorias: elegís tu selección, pateás y atajás. Canvas puro, sin dependencias, responsive. Publicado en portal de juegos.</p>
+      <p data-i18n="proj2.desc">Juego de penales con fase de grupos y eliminatorias: elegís tu selección, pateás y atajás. Canvas puro, sin dependencias, responsive. Publicado en portal de juegos.</p>
       <div class="stack"><span>JavaScript</span><span>Canvas</span><span>HTML5</span></div>
       <div class="links">
-        <a class="demo" href="https://penales-mundial.vercel.app" target="_blank" rel="noopener">▶ Jugar demo</a>
-        <a href="https://github.com/Lisandro1313/penales-mundial" target="_blank" rel="noopener">‹ › Código</a>
+        <a class="demo" href="https://penales-mundial.vercel.app" target="_blank" rel="noopener" data-i18n="link.play">▶ Jugar demo</a>
+        <a href="https://github.com/Lisandro1313/penales-mundial" target="_blank" rel="noopener" data-i18n="link.code">‹ › Código</a>
       </div>
     </div>
 
     <div class="proj">
       <div class="emoji">🧮</div>
       <span class="tag">Web tool · SEO</span>
-      <h4>Calculadoras Laborales</h4>
-      <p>Suite de calculadoras (aguinaldo, sueldo neto, indemnización, vacaciones, horas extra) optimizada para SEO y monetizada con anuncios. Next.js estático, rápido.</p>
+      <h4 data-i18n="proj3.title">Calculadoras Laborales</h4>
+      <p data-i18n="proj3.desc">Suite de calculadoras (aguinaldo, sueldo neto, indemnización, vacaciones, horas extra) optimizada para SEO y monetizada con anuncios. Next.js estático, rápido.</p>
       <div class="stack"><span>Next.js</span><span>React</span><span>TypeScript</span><span>SEO</span></div>
       <div class="links">
-        <a class="demo" href="https://calculadora-aguinaldo.vercel.app" target="_blank" rel="noopener">▶ Ver demo</a>
+        <a class="demo" href="https://calculadora-aguinaldo.vercel.app" target="_blank" rel="noopener" data-i18n="link.view">▶ Ver demo</a>
       </div>
     </div>
 
     <div class="proj">
       <div class="emoji">🎓</div>
-      <span class="tag">E-learning · Pagos</span>
+      <span class="tag" data-i18n="proj4.tag">E-learning · Pagos</span>
       <h4>Campus Virtual</h4>
-      <p>Plataforma de cursos online con reproductor de video, evaluaciones, certificados y pagos integrados con MercadoPago. Roles de estudiante y profesor.</p>
+      <p data-i18n="proj4.desc">Plataforma de cursos online con reproductor de video, evaluaciones, certificados y pagos integrados con MercadoPago. Roles de estudiante y profesor.</p>
       <div class="stack"><span>React</span><span>TypeScript</span><span>Supabase</span><span>MercadoPago</span></div>
       <div class="links">
-        <a href="https://github.com/Lisandro1313/CampusVirtual" target="_blank" rel="noopener">‹ › Código</a>
+        <a href="https://github.com/Lisandro1313/CampusVirtual" target="_blank" rel="noopener" data-i18n="link.code">‹ › Código</a>
       </div>
     </div>
 
     <div class="proj">
       <div class="emoji">🛍️</div>
       <span class="tag">E-commerce</span>
-      <h4>Bikimar — Tienda Online</h4>
-      <p>E-commerce con panel de administración, gestión de productos (CRUD), carga de imágenes con Cloudinary e integración directa con WhatsApp. Responsive.</p>
+      <h4 data-i18n="proj5.title">Bikimar — Tienda Online</h4>
+      <p data-i18n="proj5.desc">E-commerce con panel de administración, gestión de productos (CRUD), carga de imágenes con Cloudinary e integración directa con WhatsApp. Responsive.</p>
       <div class="stack"><span>Next.js 14</span><span>TypeScript</span><span>MongoDB</span><span>NextAuth</span></div>
       <div class="links">
-        <a href="https://github.com/Lisandro1313/marina" target="_blank" rel="noopener">‹ › Código</a>
+        <a href="https://github.com/Lisandro1313/marina" target="_blank" rel="noopener" data-i18n="link.code">‹ › Código</a>
       </div>
     </div>
 
     <div class="proj">
       <div class="emoji">🎫</div>
-      <span class="tag">Sistema B2B</span>
-      <h4>Turnero Municipal</h4>
-      <p>Sistema de gestión de turnos y visitantes para edificio municipal: roles (recepción, pisos, admin), cola en tiempo real, chat interno y estadísticas.</p>
+      <span class="tag" data-i18n="proj6.tag">Sistema B2B</span>
+      <h4 data-i18n="proj6.title">Turnero Municipal</h4>
+      <p data-i18n="proj6.desc">Sistema de gestión de turnos y visitantes para edificio municipal: roles (recepción, pisos, admin), cola en tiempo real, chat interno y estadísticas.</p>
       <div class="stack"><span>JavaScript</span><span>Tiempo real</span><span>Roles</span></div>
       <div class="links">
-        <a href="https://github.com/Lisandro1313/turneroMunicipal" target="_blank" rel="noopener">‹ › Código</a>
+        <a href="https://github.com/Lisandro1313/turneroMunicipal" target="_blank" rel="noopener" data-i18n="link.code">‹ › Código</a>
       </div>
     </div>
 
   </div>
-  <p style="text-align:center;margin-top:26px;color:var(--muted)">
+  <p style="text-align:center;margin-top:26px;color:var(--muted)" data-i18n="projects.more">
     Más proyectos en mi <a href="https://github.com/Lisandro1313" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">GitHub →</a>
   </p>
 </div></section>
 
 <section id="experiencia" style="background:var(--bg2)"><div class="wrap">
-  <h2 class="sec">Trayectoria</h2>
-  <h3 class="title">Experiencia</h3>
+  <h2 class="sec" data-i18n="exp.sec">Trayectoria</h2>
+  <h3 class="title" data-i18n="exp.title">Experiencia</h3>
   <div class="exp">
     <div class="item">
-      <h4>Desarrollador · Soluciones Digitales</h4>
-      <div class="when">Municipalidad de La Plata — Secretaría de Desarrollo Social · 2022 – Presente</div>
-      <p>Sistemas internos de gestión de programas sociales, seguimiento de beneficiarios, dashboards administrativos, automatización de procesos y trazabilidad. Participación end-to-end: relevamiento → producción.</p>
+      <h4 data-i18n="exp1.title">Desarrollador · Soluciones Digitales</h4>
+      <div class="when" data-i18n="exp1.when">Municipalidad de La Plata — Secretaría de Desarrollo Social · 2022 – Presente</div>
+      <p data-i18n="exp1.desc">Sistemas internos de gestión de programas sociales, seguimiento de beneficiarios, dashboards administrativos, automatización de procesos y trazabilidad. Participación end-to-end: relevamiento → producción.</p>
     </div>
     <div class="item">
       <h4>Full Stack Developer · Freelance</h4>
-      <div class="when">La Plata · 2020 – Presente</div>
-      <p>Aplicaciones web, móviles y de escritorio para pymes y clientes. Frontend en React/TypeScript, APIs y backends en Node.js/NestJS y Java/Spring Boot, integración con bases SQL, paneles admin y despliegues. E-commerce, fintech, gestión y automatización.</p>
+      <div class="when" data-i18n="exp2.when">La Plata · 2020 – Presente</div>
+      <p data-i18n="exp2.desc">Aplicaciones web, móviles y de escritorio para pymes y clientes. Frontend en React/TypeScript, APIs y backends en Node.js/NestJS y Java/Spring Boot, integración con bases SQL, paneles admin y despliegues. E-commerce, fintech, gestión y automatización.</p>
     </div>
     <div class="item">
-      <h4>Desarrollador de Apps Móviles · Freelance</h4>
-      <div class="when">2019 – Presente</div>
-      <p>Apps Android/iOS con React Native, Kotlin y Swift. Integración de pagos, geolocalización y notificaciones push.</p>
+      <h4 data-i18n="exp3.title">Desarrollador de Apps Móviles · Freelance</h4>
+      <div class="when" data-i18n="exp3.when">2019 – Presente</div>
+      <p data-i18n="exp3.desc">Apps Android/iOS con React Native, Kotlin y Swift. Integración de pagos, geolocalización y notificaciones push.</p>
     </div>
   </div>
 </div></section>
 
 <section id="contacto"><div class="wrap">
   <div class="contact">
-    <h3>¿Hablamos? 🚀</h3>
-    <p>Estoy buscando mi próximo desafío como desarrollador. Escribime y coordinamos.</p>
+    <h3 data-i18n="contact.title">¿Hablamos? 🚀</h3>
+    <p data-i18n="contact.body">Estoy buscando mi próximo desafío como desarrollador. Escribime y coordinamos.</p>
     <div class="cta" style="justify-content:center">
       <a class="btn primary" href="mailto:lism.etcheverry@gmail.com">✉ lism.etcheverry@gmail.com</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/lisandro-etcheverry1/" target="_blank" rel="noopener">in LinkedIn</a>
@@ -255,6 +259,77 @@
 </div></section>
 
 <footer><div class="wrap">© 2026 Lisandro Etcheverry · Full Stack Developer · La Plata, Argentina</div></footer>
+
+<script>
+  const I18N = {
+    es: {
+      "__title": "Lisandro Etcheverry — Desarrollador Full Stack",
+      "nav.about": "Sobre mí", "nav.skills": "Skills", "nav.projects": "Proyectos", "nav.exp": "Experiencia", "nav.contact": "Contacto",
+      "hero.pill": "🟢 Disponible para trabajar",
+      "hero.lead": "Construyo aplicaciones web, móviles y sistemas de gestión de punta a punta. Experiencia en proyectos freelance y en la Municipalidad de La Plata, con foco en productos útiles, prolijos y que llegan a producción.",
+      "hero.btnProjects": "Ver proyectos", "hero.btnContact": "Contactarme", "hero.btnCV": "Descargar CV",
+      "hero.meta1": "📍 La Plata, Argentina", "hero.meta2": "🌐 Inglés B2", "hero.meta3": "🎓 Lic. en Sistemas (UNLP)",
+      "about.sec": "Sobre mí", "about.title": "Desarrollador full-stack que termina y despliega",
+      "about.body": "Trabajo el ciclo completo: relevamiento, diseño, desarrollo, pruebas y puesta en producción. Hice sistemas internos para la <strong>Municipalidad de La Plata</strong> (gestión de programas sociales, dashboards, trazabilidad) y proyectos freelance de e-commerce, fintech, e-learning, apps móviles y juegos. Me muevo cómodo tanto en el <strong>frontend</strong> (React, Next.js, TypeScript) como en el <strong>backend</strong> (Node.js/NestJS, Java/Spring Boot, PostgreSQL) y en el deploy.",
+      "skills.sec": "Stack", "skills.title": "Tecnologías que uso", "skills.frontend": "Frontend", "skills.backend": "Backend", "skills.db": "Bases de datos", "skills.tools": "Herramientas & Prácticas",
+      "projects.sec": "Portfolio", "projects.title": "Proyectos seleccionados",
+      "proj1.tag": "Sistema de gestión · Municipal", "proj1.title": "SIGAM — Gestión Alimentaria Municipal", "proj1.desc": "Sistema integral de gestión pública: beneficiarios, stock, remitos, depósitos, casos críticos, reportes y paneles de control. Proyecto end-to-end en producción.", "proj1.link": "🔒 Proyecto privado (gobierno)",
+      "proj2.tag": "Juego HTML5", "proj2.desc": "Juego de penales con fase de grupos y eliminatorias: elegís tu selección, pateás y atajás. Canvas puro, sin dependencias, responsive. Publicado en portal de juegos.",
+      "proj3.title": "Calculadoras Laborales", "proj3.desc": "Suite de calculadoras (aguinaldo, sueldo neto, indemnización, vacaciones, horas extra) optimizada para SEO y monetizada con anuncios. Next.js estático, rápido.",
+      "proj4.tag": "E-learning · Pagos", "proj4.desc": "Plataforma de cursos online con reproductor de video, evaluaciones, certificados y pagos integrados con MercadoPago. Roles de estudiante y profesor.",
+      "proj5.title": "Bikimar — Tienda Online", "proj5.desc": "E-commerce con panel de administración, gestión de productos (CRUD), carga de imágenes con Cloudinary e integración directa con WhatsApp. Responsive.",
+      "proj6.tag": "Sistema B2B", "proj6.title": "Turnero Municipal", "proj6.desc": "Sistema de gestión de turnos y visitantes para edificio municipal: roles (recepción, pisos, admin), cola en tiempo real, chat interno y estadísticas.",
+      "projects.more": 'Más proyectos en mi <a href="https://github.com/Lisandro1313" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">GitHub →</a>',
+      "link.play": "▶ Jugar demo", "link.view": "▶ Ver demo", "link.code": "‹ › Código",
+      "exp.sec": "Trayectoria", "exp.title": "Experiencia",
+      "exp1.title": "Desarrollador · Soluciones Digitales", "exp1.when": "Municipalidad de La Plata — Secretaría de Desarrollo Social · 2022 – Presente", "exp1.desc": "Sistemas internos de gestión de programas sociales, seguimiento de beneficiarios, dashboards administrativos, automatización de procesos y trazabilidad. Participación end-to-end: relevamiento → producción.",
+      "exp2.when": "La Plata · 2020 – Presente", "exp2.desc": "Aplicaciones web, móviles y de escritorio para pymes y clientes. Frontend en React/TypeScript, APIs y backends en Node.js/NestJS y Java/Spring Boot, integración con bases SQL, paneles admin y despliegues. E-commerce, fintech, gestión y automatización.",
+      "exp3.title": "Desarrollador de Apps Móviles · Freelance", "exp3.when": "2019 – Presente", "exp3.desc": "Apps Android/iOS con React Native, Kotlin y Swift. Integración de pagos, geolocalización y notificaciones push.",
+      "contact.title": "¿Hablamos? 🚀", "contact.body": "Estoy buscando mi próximo desafío como desarrollador. Escribime y coordinamos."
+    },
+    en: {
+      "__title": "Lisandro Etcheverry — Full Stack Developer",
+      "nav.about": "About", "nav.skills": "Skills", "nav.projects": "Projects", "nav.exp": "Experience", "nav.contact": "Contact",
+      "hero.pill": "🟢 Open to work",
+      "hero.lead": "I build web and mobile applications and management systems end-to-end. Experience in freelance projects and at the Municipality of La Plata, focused on useful, polished products that reach production.",
+      "hero.btnProjects": "View projects", "hero.btnContact": "Contact me", "hero.btnCV": "Download CV",
+      "hero.meta1": "📍 La Plata, Argentina", "hero.meta2": "🌐 English B2", "hero.meta3": "🎓 BSc in Systems (UNLP)",
+      "about.sec": "About me", "about.title": "Full-stack developer who finishes and ships",
+      "about.body": "I work the full cycle: requirements, design, development, testing and deployment. I built internal systems for the <strong>Municipality of La Plata</strong> (social-program management, dashboards, traceability) and freelance projects in e-commerce, fintech, e-learning, mobile apps and games. I'm comfortable both on the <strong>frontend</strong> (React, Next.js, TypeScript) and the <strong>backend</strong> (Node.js/NestJS, Java/Spring Boot, PostgreSQL), as well as deployment.",
+      "skills.sec": "Stack", "skills.title": "Technologies I use", "skills.frontend": "Frontend", "skills.backend": "Backend", "skills.db": "Databases", "skills.tools": "Tools & Practices",
+      "projects.sec": "Portfolio", "projects.title": "Selected projects",
+      "proj1.tag": "Management system · Government", "proj1.title": "SIGAM — Municipal Food Management", "proj1.desc": "Comprehensive public-management system: beneficiaries, stock, delivery notes, warehouses, critical cases, reports and control panels. End-to-end project in production.", "proj1.link": "🔒 Private project (government)",
+      "proj2.tag": "HTML5 Game", "proj2.desc": "Penalty shootout game with group stage and knockouts: pick your national team, shoot and save. Pure canvas, no dependencies, responsive. Published on a games portal.",
+      "proj3.title": "Labor Calculators", "proj3.desc": "Suite of calculators (bonus, net salary, severance, vacation, overtime) optimized for SEO and monetized with ads. Static Next.js, fast.",
+      "proj4.tag": "E-learning · Payments", "proj4.desc": "Online course platform with video player, assessments, certificates and payments integrated with MercadoPago. Student and teacher roles.",
+      "proj5.title": "Bikimar — Online Store", "proj5.desc": "E-commerce with admin panel, product management (CRUD), image uploads with Cloudinary and direct WhatsApp integration. Responsive.",
+      "proj6.tag": "B2B System", "proj6.title": "Municipal Queue System", "proj6.desc": "Appointment and visitor management system for a municipal building: roles (reception, floors, admin), real-time queue, internal chat and statistics.",
+      "projects.more": 'More projects on my <a href="https://github.com/Lisandro1313" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">GitHub →</a>',
+      "link.play": "▶ Play demo", "link.view": "▶ View demo", "link.code": "‹ › Code",
+      "exp.sec": "Career", "exp.title": "Experience",
+      "exp1.title": "Developer · Digital Solutions", "exp1.when": "Municipality of La Plata — Social Development Dept. · 2022 – Present", "exp1.desc": "Internal systems for social-program management, beneficiary tracking, admin dashboards, process automation and traceability. End-to-end involvement: requirements → production.",
+      "exp2.when": "La Plata · 2020 – Present", "exp2.desc": "Web, mobile and desktop apps for SMEs and clients. Frontend in React/TypeScript, APIs and backends in Node.js/NestJS and Java/Spring Boot, SQL database integration, admin panels and deployments. E-commerce, fintech, management and automation.",
+      "exp3.title": "Mobile App Developer · Freelance", "exp3.when": "2019 – Present", "exp3.desc": "Android/iOS apps with React Native, Kotlin and Swift. Payments, geolocation and push notifications.",
+      "contact.title": "Let's talk? 🚀", "contact.body": "I'm looking for my next challenge as a developer. Drop me a line and let's chat."
+    }
+  };
+  function setLang(lang){
+    const dict = I18N[lang]; if(!dict) return;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      const k = el.getAttribute('data-i18n');
+      if(dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    if(dict.__title) document.title = dict.__title;
+    document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.lang === lang); });
+    try { localStorage.setItem('lang', lang); } catch(e){}
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+  var saved; try { saved = localStorage.getItem('lang'); } catch(e){}
+  setLang(saved || (navigator.language && navigator.language.toLowerCase().indexOf('es') === 0 ? 'es' : 'en'));
+</script>
 
 </body>
 </html>
